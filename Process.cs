@@ -89,8 +89,8 @@ namespace Alacrity.Library {
         public Process(string fileName, string arguments, string workingDirectory) {
             STARTUPINFO si = new();
             si.cb = Marshal.SizeOf(si);
-            // si.dwFlags = 0x00000001; // STARTF_USESHOWWINDOW
-            // si.wShowWindow = 0; // SW_HIDE
+            si.dwFlags = 0x00000001; // STARTF_USESHOWWINDOW
+            si.wShowWindow = 0; // SW_HIDE
 
             fileName = Path.Combine(workingDirectory, fileName);
 
@@ -133,7 +133,7 @@ namespace Alacrity.Library {
         public static void KillProcessesByName(string processName) {
             uint[] processIds = new uint[1024];
 
-            if (!EnumProcesses(processIds, (uint) processIds.Length * sizeof(uint), out uint bytesNeeded)) {
+            if (!EnumProcesses(processIds, (uint)processIds.Length * sizeof(uint), out uint bytesNeeded)) {
                 return;
             }
 
